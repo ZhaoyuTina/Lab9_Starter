@@ -95,7 +95,18 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      try {
+        if (operator == '/' && secondNum == 0) {
+          //TODO: throw a custom error for #DIV0!
+        }
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      } catch (errorCaught) {
+        //rethrow the error
+        throw errorCaught;
+        alert("Invalid inputs detected!");
+      } finally {
+        console.log("Calculation was successful!");
+      }
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
