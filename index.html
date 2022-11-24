@@ -88,6 +88,14 @@
   </main>
 
   <script>
+    // extends to invalid input so that only float values can be inputed
+    class InvalidInputError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = "InvalidInputError";
+      }
+    }
+
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -96,8 +104,13 @@
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
       try {
-        if (operator == '/' && secondNum == 0) {
+        // Add custom InvalidInputError here
+        if (!/^\d+$/.test(firstNum) || !/^\d+$/.test(secondNum)){
+          throw new InvalidInputError("Input numbers should only contain digits");
+        }
+        else if (operator == '/' && secondNum == 0) {
           //TODO: throw a custom error for #DIV0!
+          throw new SyntaxError("Divide by 0 detected");
         }
         output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
       } catch (errorCaught) {
