@@ -102,7 +102,104 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
-
+    let countQuant = 0;
+    // add functionality to the Console Log button
+    document.querySelector('#console-log-button').addEventListener('click', function() {
+      console.log("Console Log button clicked!");
+    });
+    // add functionality to the Console Error button
+    document.querySelector('#console-error-button').addEventListener('click', function() {
+      console.error("Console Error button clicked!");
+    });
+    // add functionality to the Console Count button
+    document.querySelector('#console-count-button').addEventListener('click', function() {
+      countQuant++;
+      console.log("Count Button quantity: " + countQuant);
+    });
+    // add functionality to the Console Warn button
+    document.querySelector('#console-warn-button').addEventListener('click', function() {
+      console.warn("Console Warn button clicked!");
+    });
+    // add functionality to the Console Assert button
+    document.querySelector('#console-assert-button').addEventListener('click', function() {
+      console.assert(countQuant == 4, "Console Assert button clicked! Count is not equal to 4.");
+    });
+    // add functionality to the Console Clear button
+    document.querySelector('#console-clear-button').addEventListener('click', function() {
+      console.clear();
+    });
+    // add functionality to the Console Dir button
+    document.querySelector('#console-dir-button').addEventListener('click', function() {
+      console.dir(document.querySelector('#console-dir-button'));
+    });
+    // add functionality to the Console Dirxml button
+    document.querySelector('#console-dirxml-button').addEventListener('click', function() {
+      console.dirxml(document.getElementById('console-dirxml-button'));
+    });
+    // add functionality to the Console Group Start button
+    document.querySelector('#console-group-start-button').addEventListener('click', function() {
+      console.group();
+    });
+    // add functionality to the Console Group End button
+    document.querySelector('#console-group-end-button').addEventListener('click', function() {
+      console.groupEnd();
+    });
+    // add functionality to the Console Table button
+    document.querySelector('#console-table-button').addEventListener('click', function() {
+      const myTable = [
+        ["element 1", "element 2", "element 3"],
+        ["element 4", "element 5", "element 6"],
+        ["element 7", "element 8", "element 9"],
+      ];
+      console.table(myTable);
+    });
+    let trackTime = false;
+    let startTime, endTime, timerValue;
+    // add functionality to the Timer Start button
+    document.querySelector('#start-timer-button').addEventListener('click', function() {
+      // start timer if it has not been started
+      if (trackTime) {
+        console.error("Timer has already started!");
+      } else {
+        startTime = Date.now();
+        trackTime = true;
+      }
+    });
+    // add functionality to the Timer End button
+    document.querySelector('#end-timer-button').addEventListener('click', function() {
+      // end timer if it ihas already started
+      if (trackTime) {
+        endTime = Date.now();
+        timerValue = (endTime - startTime);
+        console.log("Timer value: " + timerValue + "ms");
+        trackTime = false;
+      } else {
+        console.error("Timer has not started!");
+      }
+    });
+    // add functionality to the Console Trace button
+    document.querySelector('#console-trace-button').addEventListener('click', function() {
+      function func1 () {
+        function func2 () {
+          function func3 () {
+            console.trace();
+          }
+          func3();
+        }
+        func2();
+      }
+      func1();
+    });
+    // add functionality to the Global Error button
+    document.querySelector('#console-global-error-button').addEventListener('click', function() {
+      function func1 () {
+        func2();
+      }
+      function func2 () {
+        func1();
+      }
+      func1();
+    });
   </script>
 </body>
 
