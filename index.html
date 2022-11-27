@@ -46,11 +46,19 @@
       padding: 8px 2px;
       width: 122px;
     }
-  </style>
+  </style>                  
 </head>
 
 <body>
   <main>
+    <!--Insert TrackJS script-->
+    <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+    <script>
+      window.TrackJS && TrackJS.install({ 
+        token: "7b9c7cbb62c14f4a8a770a322d3d3948"
+        // for more configuration options, see https://docs.trackjs.com
+      });
+    </script>
     <form>
       <fieldset>
         <legend>Error Calculator</legend>
@@ -106,10 +114,11 @@
       try {
         // Add custom InvalidInputError here
         if (!/^\d+$/.test(firstNum) || !/^\d+$/.test(secondNum)){
+          TrackJS.track('Input numbers should only contain digits');
           throw new InvalidInputError("Input numbers should only contain digits");
         }
         else if (operator == '/' && secondNum == 0) {
-          //TODO: throw a custom error for #DIV0!
+          TrackJS.track('Divide by 0 detected');
           throw new SyntaxError("Divide by 0 detected");
         }
         output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
